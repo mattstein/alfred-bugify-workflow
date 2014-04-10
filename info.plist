@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>workingconcept.bugify</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>1AC88D07-372C-47F9-B944-3A714DB50B73</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D748945F-D839-471E-A5EA-4B9BBCF17E0B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>5E9FA16E-5225-4FCE-92F2-8BA1057A6FA2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D4FA208E-3FE6-479A-9F40-CDB2C82F9337</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>08EB276C-3D19-4027-907E-EFA3427052C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Matt Stein</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Bugify</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>open "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>08EB276C-3D19-4027-907E-EFA3427052C2</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>36</integer>
+				<key>keyword</key>
+				<string>bugify</string>
+				<key>runningsubtext</key>
+				<string>Fetching results...</string>
+				<key>script</key>
+				<string>php -f bugify.php -- "{query}"</string>
+				<key>subtext</key>
+				<string>Find Bugify issues</string>
+				<key>title</key>
+				<string>Bugify</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>80</integer>
+				<key>script</key>
+				<string>require( 'workflows.php' ); // by David Ferguson
+$wf = new Workflows();
+
+if (! $existing_settings = $wf-&gt;read('settings'))
+{
+	$settings = array();
+}
+
+foreach ($existing_settings as $key =&gt; $val)
+{
+	$settings[$key] = $val;
+}
+
+$settings['base_url'] = trim("{query}");
+
+$wf-&gt;write($settings, 'settings');
+</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D4FA208E-3FE6-479A-9F40-CDB2C82F9337</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>setbugifyurl</string>
+				<key>subtext</key>
+				<string>setbugifyurl http://yourbugifyurl.com/</string>
+				<key>text</key>
+				<string>Bugify Base URL</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5E9FA16E-5225-4FCE-92F2-8BA1057A6FA2</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>require( 'workflows.php' ); // by David Ferguson
+$wf = new Workflows();
+
+if (! $existing_settings = $wf-&gt;read('settings'))
+{
+	$settings = array();
+}
+
+foreach ($existing_settings as $key =&gt; $val)
+{
+	$settings[$key] = $val;
+}
+
+$settings['api_key'] = trim("{query}");
+
+$wf-&gt;write($settings, 'settings');
+</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D748945F-D839-471E-A5EA-4B9BBCF17E0B</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>setbugifykey</string>
+				<key>subtext</key>
+				<string>setbugifykey YOUR_API_KEY</string>
+				<key>text</key>
+				<string>Bugify API Key</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1AC88D07-372C-47F9-B944-3A714DB50B73</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>08EB276C-3D19-4027-907E-EFA3427052C2</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>1AC88D07-372C-47F9-B944-3A714DB50B73</key>
+		<dict>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+		<key>5E9FA16E-5225-4FCE-92F2-8BA1057A6FA2</key>
+		<dict>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+		<key>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</key>
+		<dict>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>D4FA208E-3FE6-479A-9F40-CDB2C82F9337</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>D748945F-D839-471E-A5EA-4B9BBCF17E0B</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://workingconcept.com</string>
+</dict>
+</plist>
